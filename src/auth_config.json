@@ -1,4 +1,5 @@
 {
   "domain": "cclmerch.us.auth0.com",
-  "clientId": "MnNJiBL5PiFRZb5fi38tUF0mlzfEVBiE"
+  "clientId": "MnNJiBL5PiFRZb5fi38tUF0mlzfEVBiE",
+  "audience": "https://cclMerchApi/"
 }

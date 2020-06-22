@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Nav from "./components/NavBar";
 import { useAuth0 } from "./auth";
 import PrivateRoute from "./components/PrivateRoute";
+import "antd/dist/antd.css";
 
 import "./App.css";
 
