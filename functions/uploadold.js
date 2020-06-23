@@ -1,13 +1,15 @@
 require("dotenv").config();
-require("dotenv").config();
-const mongoose = require("mongoose");
-const Merch = require("./Models/Merch");
 
 const {
   getAccessTokenFromHeaders,
   validateAccessToken,
 } = require("./utils/auth");
 const cloudinary = require("cloudinary");
+const faunadb = require("faunadb");
+const q = faunadb.query;
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SECRET,
+});
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,7 +18,6 @@ cloudinary.config({
 });
 
 exports.handler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
   const token = getAccessTokenFromHeaders(event.headers);
   const user = await validateAccessToken(token);
 
@@ -37,25 +38,33 @@ exports.handler = async (event, context, callback) => {
     upload_preset: "dev_setup",
   });
 
-  const desktopImage = await res1.secure_url;
-  const mobileImage = await res2.secure_url;
+  const dimageUrl = await res1.secure_url;
+  const mimageUrl = await res2.secure_url;
 
-  mongoose.connect(
-    `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@${process.env.MONGODB}`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  );
-  const newMerch = new Merch({
-    desktopImage,
-    mobileImage,
-    saleType,
-  });
-  const merchNew = await newMerch.save();
+  const merchItem = {
+    data: {
+      dimageUrl,
+      mimageUrl,
+      saleType,
+    },
+  };
 
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify(merchNew),
-  });
+  return client
+    .query(q.Create(q.Ref("classes/merch"), merchItem))
+    .then((response) => {
+      console.log("success", response);
+      /* Success! return the response with statusCode 200 */
+      return callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(response),
+      });
+    })
+    .catch((error) => {
+      console.log("error", error);
+      /* Error! return the error with statusCode 400 */
+      return callback(null, {
+        statusCode: 400,
+        body: JSON.stringify(error),
+      });
+    });
 };
