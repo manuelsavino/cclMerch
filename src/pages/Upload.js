@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Input } from "antd";
-import { Button } from "antd";
 import { useAuth0 } from "../auth";
 
 export default function Upload() {
@@ -55,20 +53,20 @@ export default function Upload() {
     <div>
       <h1>Upload</h1>
       <form onSubmit={submitHandler}>
-        <Input
+        <input
           type="text"
           name="saleType"
           value={formData.saleType}
           onChange={handleInputChange}
           placeholder="Sale Type"
         />
-        <Input
+        <input
           type="file"
           name="dimage"
           onChange={handleFileInputChage}
           className="form-input"
         />
-        <Input
+        <input
           type="file"
           name="mimage"
           onChange={handleFileInputChage}
