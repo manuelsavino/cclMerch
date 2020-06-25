@@ -231,10 +231,10 @@ function ImageGallery() {
                 // <Card key={image._id} className={classes.card}>
                 //   <CardActionArea>
                 //     <CardMedia>
-                <LazyLoadImage
+                <img
                   key={image._id}
                   className={classes.media}
-                  effect="blur"
+                  // effect="blur"
                   src={`https://www.carnival.com${paths[image.path].path}${
                     image.fileName
                   }.ashx?useCustomFunctions=1&${paths[image.path].dimentions}`}
