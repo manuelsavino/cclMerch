@@ -39,7 +39,7 @@ exports.handler = async (event, context, callback) => {
   } catch (e) {
     callback(null, {
       statusCode: 500,
-      body: JSON.stringify({ msg: "Something went Wronf" }),
+      body: JSON.stringify({ msg: e }),
     });
     mongoose.connection.close();
   }

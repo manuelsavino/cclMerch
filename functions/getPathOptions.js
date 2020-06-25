@@ -26,7 +26,7 @@ exports.handler = async (event, context, callback) => {
 
     callback(null, {
       statusCode: 500,
-      body: JSON.stringify({ msg: "Something went wrong" }),
+      body: JSON.stringify({ msg: e }),
     });
     mongoose.connection.close();
   }
