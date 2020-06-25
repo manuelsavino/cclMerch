@@ -166,7 +166,6 @@ function ImageGallery() {
   }, []);
 
   const handleChange = (event, newValue) => {
-    console.log(event.target);
     setValue(newValue);
   };
 
@@ -216,7 +215,6 @@ function ImageGallery() {
           margin: "10px",
         }}
       >
-        {/* <div> */}
         <div
           style={{
             display: "flex",
@@ -224,42 +222,7 @@ function ImageGallery() {
             justifyContent: "space-around",
           }}
         >
-          {console.log(paths)}
-          {images.length ? (
-            images.map(
-              (image) => (
-                // <Card key={image._id} className={classes.card}>
-                //   <CardActionArea>
-                //     <CardMedia>
-                <img
-                  key={image._id}
-                  className={classes.media}
-                  // effect="blur"
-                  src={`https://www.carnival.com${paths[image.path].path}${
-                    image.fileName
-                  }.ashx?useCustomFunctions=1&${paths[image.path].dimentions}`}
-                />
-              )
-              //     </CardMedia>
-              //     <CardContent>
-              //       <Typography gutterBottom variant="h5" component="h2">
-              //         {image.fileName}
-              //       </Typography>
-              //     </CardContent>
-              //   </CardActionArea>
-              //   <CardActions>
-              //     <Button size="small" color="primary">
-              //       COPY PATH
-              //     </Button>
-              //     <Button size="small" color="primary">
-              //       VIEW
-              //     </Button>
-              //   </CardActions>
-              // </Card>
-            )
-          ) : (
-            <h2>Loading...</h2>
-          )}
+          {images && images.map((image) => <h1>{image.fileName}</h1>)}
         </div>
       </Box>
     </main>
