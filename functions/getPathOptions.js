@@ -20,7 +20,9 @@ exports.handler = async (event, context, callback) => {
       statusCode: 200,
       body: JSON.stringify(Paths),
     });
-    // mongoose.connection.close();
+    if (Paths) {
+      mongoose.connection.close();
+    }
   } catch (e) {
     console.log(e);
 
