@@ -51,6 +51,7 @@ function ImageGallery() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [paths, setPaths] = useState([]);
   const { getTokenSilently } = useAuth0();
 
@@ -154,39 +155,35 @@ function ImageGallery() {
             justifyContent: "space-around",
           }}
         >
-          {Object.keys(paths).length > 0 && images.length ? (
+          {Object.keys(paths).length > 0 && images.length > 0 ? (
             images.map((image) => {
               return (
-                // <LazyLoad height={200}>
-                <Card key={image._id} className={classes.card}>
-                  <CardActionArea>
-                    <CardMedia>
-                      <LazyLoadImage
-                        className={classes.media}
-                        effect="blur"
-                        src={`https://www.carnival.com${
-                          paths[image.path].path
-                        }${image.fileName}.ashx?useCustomFunctions=1&${
-                          paths[image.path].dimentions
-                        }`}
-                      />
-                    </CardMedia>
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {image.fileName}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      COPY PATH
-                    </Button>
-                    <Button size="small" color="primary">
-                      VIEW
-                    </Button>
-                  </CardActions>
-                </Card>
-                // </LazyLoad>
+                // <Card key={image._id} className={classes.card}>
+                //   <CardActionArea>
+                //     <CardMedia>
+                <LazyLoadImage
+                  className={classes.media}
+                  effect="blur"
+                  src={`https://www.carnival.com${paths[image.path].path}${
+                    image.fileName
+                  }.ashx?useCustomFunctions=1&${paths[image.path].dimentions}`}
+                />
+                //     </CardMedia>
+                //     <CardContent>
+                //       <Typography gutterBottom variant="h5" component="h2">
+                //         {image.fileName}
+                //       </Typography>
+                //     </CardContent>
+                //   </CardActionArea>
+                //   <CardActions>
+                //     <Button size="small" color="primary">
+                //       COPY PATH
+                //     </Button>
+                //     <Button size="small" color="primary">
+                //       VIEW
+                //     </Button>
+                //   </CardActions>
+                // </Card>
               );
             })
           ) : (
