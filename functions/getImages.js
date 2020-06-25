@@ -8,7 +8,7 @@ const {
 } = require("./utils/auth");
 
 exports.handler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
+  // context.callbackWaitsForEmptyEventLoop = false;
   // const token = getAccessTokenFromHeaders(event.headers);
   // const user = await validateAccessToken(token);
 
