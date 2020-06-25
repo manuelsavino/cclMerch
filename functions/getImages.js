@@ -18,6 +18,14 @@ exports.handler = async (event, context, callback) => {
   //     body: JSON.stringify({ err: "Unathorized" }),
   //   };
   // }
+
+  function closeBD(cbk) {
+    console.log("Close BD");
+    db.close(function () {
+      cbk();
+    });
+  }
+
   try {
     mongoose.connect(
       `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@${process.env.MONGODB}`,
@@ -31,11 +39,13 @@ exports.handler = async (event, context, callback) => {
     const param = year.split(",");
     const images = await Image.find({ path: { $in: param } });
 
+    d;
+
     callback(null, {
       statusCode: 200,
       body: JSON.stringify(images),
     });
-    mongoose.connection.close();
+    // mongoose.connection.close();
   } catch (e) {
     callback(null, {
       statusCode: 500,
