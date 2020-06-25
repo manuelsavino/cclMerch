@@ -53,7 +53,6 @@ function ImageGallery() {
   const [images, setImages] = useState([]);
   const [paths, setPaths] = useState([]);
   const { getTokenSilently } = useAuth0();
-  const [term, setTerm] = useState("");
 
   const fetchImage = async (term) => {
     setImages([]);
@@ -93,6 +92,7 @@ function ImageGallery() {
     } catch (err) {
       console.log("err", err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event, newValue) => {

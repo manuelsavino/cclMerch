@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 //Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({

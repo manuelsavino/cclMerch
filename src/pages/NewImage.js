@@ -3,7 +3,6 @@ import { useAuth0 } from "../auth";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -59,6 +58,7 @@ export default function Upload() {
     } catch (err) {
       console.log("err", err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const submitHandler = async (e) => {

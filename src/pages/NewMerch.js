@@ -4,7 +4,6 @@ import { useAuth0 } from "../auth";
 //Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +36,7 @@ function Dashboard() {
   const handleFileInputChage = (e) => {
     const files = [];
     const name = e.target.name;
-    Object.keys(e.target.files).map((file) => {
+    Object.keys(e.target.files).forEach((file) => {
       files.push(e.target.files[file]);
     });
     console.log(files);
