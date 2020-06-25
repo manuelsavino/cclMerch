@@ -1,6 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const Image = require("./Models/Image");
+const Path = require("./Models/Paths");
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -13,22 +13,17 @@ exports.handler = async (event, context, callback) => {
         useUnifiedTopology: true,
       }
     );
-    const formData = JSON.parse(event.body);
-    const { fileName, path } = formData;
 
-    const newImage = new Image({
-      fileName,
-      path,
-    });
-
-    const imageNew = await newImage.save();
+    const Paths = await Path.find({});
 
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify(imageNew),
+      body: JSON.stringify(Paths),
     });
     mongoose.connection.close();
   } catch (e) {
+    console.log(e);
+
     callback(null, {
       statusCode: 500,
       body: JSON.stringify({ msg: "Something went wrong" }),

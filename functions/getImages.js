@@ -9,15 +9,15 @@ const {
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  const token = getAccessTokenFromHeaders(event.headers);
-  const user = await validateAccessToken(token);
+  // const token = getAccessTokenFromHeaders(event.headers);
+  // const user = await validateAccessToken(token);
 
-  if (!user) {
-    return {
-      statusCode: "401",
-      body: JSON.stringify({ err: "Unathorized" }),
-    };
-  }
+  // if (!user) {
+  //   return {
+  //     statusCode: "401",
+  //     body: JSON.stringify({ err: "Unathorized" }),
+  //   };
+  // }
   try {
     mongoose.connect(
       `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@${process.env.MONGODB}`,
@@ -26,7 +26,21 @@ exports.handler = async (event, context, callback) => {
         useUnifiedTopology: true,
       }
     );
+    const { year } = event.queryStringParameters;
+    console.log(year);
+    const param = year.split(",");
+    const images = await Image.find({ path: { $in: param } });
+
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(images),
+    });
+    mongoose.connection.close();
   } catch (e) {
-    console.log(e);
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify({ msg: "Something went Wronf" }),
+    });
+    mongoose.connection.close();
   }
 };
