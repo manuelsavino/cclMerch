@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Path = require("./Models/Paths");
 
 exports.handler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
+  // context.callbackWaitsForEmptyEventLoop = false;
 
   try {
     mongoose.connect(
@@ -20,9 +20,8 @@ exports.handler = async (event, context, callback) => {
       statusCode: 200,
       body: JSON.stringify(Paths),
     });
-    if (Paths) {
-      mongoose.connection.close();
-    }
+
+    mongoose.connection.close();
   } catch (e) {
     console.log(e);
 

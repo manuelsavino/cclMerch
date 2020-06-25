@@ -12,6 +12,7 @@
     "antd": "^4.3.5",
     "axios": "^0.19.2",
     "cloudinary": "^1.22.0",
+    "co": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.8.1",
     "mongoose": "^5.9.20",
