@@ -52,7 +52,76 @@ function ImageGallery() {
   const [value, setValue] = useState(0);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [paths, setPaths] = useState([]);
+  const [paths, setPaths] = useState({
+    dh2018: {
+      path: "/~/media/Images/hp-merch/2018/desktop/heros/",
+      dimentions: "centerCrop=1&w=500&h=200",
+    },
+    dh2020: {
+      path: "/~/media/Images/hp-merch/2020/desktop/heros/",
+      dimentions: "centerCrop=1&w=500&h=200",
+    },
+    mh2019: {
+      path: "/~/media/Images/hp-merch/2019/mobile/heros/",
+      dimentions: "centerCrop=1&w=500&h=200",
+    },
+    mh2020: {
+      path: "/~/media/Images/hp-merch/2020/mobile/heros/",
+      dimentions: "centerCrop=1&w=500&h=200",
+    },
+    dh2019: {
+      path: "/~/media/Images/hp-merch/2019/desktop/heros/",
+      dimentions: "centerCrop=1&w=500&h=200",
+    },
+    db2020: {
+      path: "/~/media/Images/hp-merch/2020/desktop/tiles/",
+      dimentions: "centerCrop=1&w=300&h=200",
+    },
+    dc2020: {
+      path: "/~/media/Images/hp-merch/2020/desktop/c-banner/",
+      dimentions: "centerCrop=1&w=300&h=200",
+    },
+    mb2019: {
+      path: "/~/media/Images/hp-merch/2019/mobile/tiles/",
+      dimentions: "centerCrop=1&w=300&h=200",
+    },
+    db2019: {
+      path: "/~/media/Images/hp-merch/2019/desktop/tiles/",
+      dimentions: "centerCrop=1&w=300&h=200",
+    },
+    mb2020: {
+      path: "/~/media/Images/hp-merch/2020/mobile/tiles/",
+      dimentions: "centerCrop=1&w=400&h=200",
+    },
+    ms2019: {
+      path: "/~/media/Images/hp-merch/2019/butter-bar/",
+      dimentions: "centerCrop=1&w=500&h=100",
+    },
+    ms2020: {
+      path: "/~/media/Images/hp-merch/2020/mobile/sticky/",
+      dimentions: "centerCrop=1&w=500&h=100",
+    },
+    cd2019: {
+      path: "/~/media/Images/cruise-deals/2019/",
+      dimentions: "centerCrop=1&w=500&h=300",
+    },
+    sb2020: {
+      path: "/~/media/Images/hp-merch/2020/search/",
+      dimentions: "centerCrop=1&w=500&h=300",
+    },
+    cd2020: {
+      path: "/~/media/Images/cruise-deals/2020/",
+      dimentions: "centerCrop=1&w=500&h=300",
+    },
+    sb2019: {
+      path: "/~/media/Images/hp-merch/2019/search/",
+      dimentions: "centerCrop=1&w=500&h=300",
+    },
+    tgo2020: {
+      path: "/~/media/Images/hp-merch/2020/extras/",
+      dimentions: "centerCrop=1&w=500&h=300",
+    },
+  });
   const { getTokenSilently } = useAuth0();
 
   const fetchImage = async (term) => {
@@ -89,7 +158,7 @@ function ImageGallery() {
   useEffect(() => {
     try {
       fetchImage("dh2020,dh2019");
-      fetchPaths();
+      // fetchPaths();
     } catch (err) {
       console.log("err", err);
     }
@@ -155,37 +224,39 @@ function ImageGallery() {
             justifyContent: "space-around",
           }}
         >
-          {Object.keys(paths).length > 0 && images.length > 0 ? (
-            images.map((image) => {
-              return (
+          {console.log(paths)}
+          {images.length ? (
+            images.map(
+              (image) => (
                 // <Card key={image._id} className={classes.card}>
                 //   <CardActionArea>
                 //     <CardMedia>
                 <LazyLoadImage
+                  key={image._id}
                   className={classes.media}
                   effect="blur"
                   src={`https://www.carnival.com${paths[image.path].path}${
                     image.fileName
                   }.ashx?useCustomFunctions=1&${paths[image.path].dimentions}`}
                 />
-                //     </CardMedia>
-                //     <CardContent>
-                //       <Typography gutterBottom variant="h5" component="h2">
-                //         {image.fileName}
-                //       </Typography>
-                //     </CardContent>
-                //   </CardActionArea>
-                //   <CardActions>
-                //     <Button size="small" color="primary">
-                //       COPY PATH
-                //     </Button>
-                //     <Button size="small" color="primary">
-                //       VIEW
-                //     </Button>
-                //   </CardActions>
-                // </Card>
-              );
-            })
+              )
+              //     </CardMedia>
+              //     <CardContent>
+              //       <Typography gutterBottom variant="h5" component="h2">
+              //         {image.fileName}
+              //       </Typography>
+              //     </CardContent>
+              //   </CardActionArea>
+              //   <CardActions>
+              //     <Button size="small" color="primary">
+              //       COPY PATH
+              //     </Button>
+              //     <Button size="small" color="primary">
+              //       VIEW
+              //     </Button>
+              //   </CardActions>
+              // </Card>
+            )
           ) : (
             <h2>Loading...</h2>
           )}
