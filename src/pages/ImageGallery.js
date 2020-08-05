@@ -222,7 +222,14 @@ function ImageGallery() {
             justifyContent: "space-around",
           }}
         >
-          {images && images.map((image) => <h1>{image.fileName}</h1>)}
+          {images &&
+            images.map((image) => (
+              <img
+                src={`https://www.carnival.com${paths[image.path].path}${
+                  image.fileName
+                }.asxh?useCustomFunctions=1&centerCrop=1&w=500&h=200`}
+              />
+            ))}
         </div>
       </Box>
     </main>
